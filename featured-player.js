@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     `;
     document.body.appendChild(videoModal);
+    videoModal.style.display = 'none'; // <--- 添加这一行
     
     // Get video player and close button
     const videoPlayer = document.getElementById('video-player');
@@ -96,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
             closeVideoModal();
         }
     });
-    
     // Hide all play buttons
     const playOverlays = document.querySelectorAll('.play-overlay');
     playOverlays.forEach(overlay => {
