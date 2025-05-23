@@ -1,0 +1,324 @@
+/* 视频创作页面样式 */
+.video-creator-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    text-align: center;
+    position: relative;
+}
+
+/* 表单样式 */
+.video-form-container {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+/* 提示词输入区域 */
+#video-prompt {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: rgba(20, 20, 43, 0.5);
+    color: var(--text-color);
+    font-size: 14px;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+#video-prompt:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(102, 0, 255, 0.2);
+}
+
+/* 音频上传区域 */
+.audio-upload-container {
+    margin-top: 10px;
+}
+
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(20, 20, 43, 0.3);
+}
+
+.upload-area:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(102, 0, 255, 0.05);
+}
+
+.upload-icon {
+    font-size: 40px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.upload-text {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.upload-hint {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.file-input {
+    display: none;
+}
+
+/* 上传后的音频预览 */
+.uploaded-audio-preview {
+    margin-top: 15px;
+    background-color: rgba(42, 42, 74, 0.5);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.audio-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.audio-info i {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.audio-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.audio-name {
+    font-size: 14px;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.audio-size {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.audio-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.preview-btn, .remove-btn {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.preview-btn {
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remove-btn {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff3333;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-btn:hover {
+    background-color: #5500cc;
+}
+
+.remove-btn:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+/* 生成的视频展示区域 */
+.generated-video-container {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.video-result {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-player-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.video-player {
+    width: 100%;
+    display: block;
+    background-color: #000;
+}
+
+.video-controls {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.video-download-btn, .video-share-btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.video-download-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.video-share-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.video-download-btn:hover, .video-share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 加载指示器 */
+.video-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.video-loading-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid rgba(102, 0, 255, 0.1);
+    border-top: 5px solid var(--primary-color);
+    animation: spin 1.5s linear infinite;
+    margin-bottom: 20px;
+}
+
+.video-loading-text {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.video-loading-subtext {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.custom-dialog-mask {
+    position: fixed;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom-dialog-box {
+    background: #232347;
+    border-radius: 12px;
+    padding: 32px 36px 24px 36px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    min-width: 320px;
+    text-align: center;
+}
+.custom-dialog-content {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+.custom-dialog-btn {
+    padding: 8px 32px;
+    background: linear-gradient(90deg, #6a5cff 0%, #a985ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.custom-dialog-btn:hover {
+    background: linear-gradient(90deg, #a985ff 0%, #6a5cff 100%);
+}
+.remove-btn:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .video-form-container, .generated-video-container {
+        padding: 20px;
+    }
+    
+    .upload-area {
+        padding: 20px;
+    }
+    
+    .upload-icon {
+        font-size: 30px;
+    }
+    
+    .video-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .video-download-btn, .video-share-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
