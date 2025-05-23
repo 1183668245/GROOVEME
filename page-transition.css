@@ -1,0 +1,470 @@
+/* Page transition animation styles */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Transition background */
+.transition-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: var(--background-color);
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+/* Transition light effect */
+.transition-light {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, rgba(102, 0, 255, 0.3) 0%, rgba(255, 153, 0, 0) 70%);
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Transition circle */
+.transition-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+    box-shadow: 0 0 80px 10px rgba(102, 0, 255, 0.5);
+}
+
+/* Transition blur effect */
+.transition-blur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+/* Transition animation - leaving current page */
+.page-transition.animate-out .transition-circle {
+    animation: circle-expand 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.page-transition.animate-out .transition-light {
+    animation: light-fade-in 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.page-transition.animate-out .transition-bg {
+    animation: bg-fade-in 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.page-transition.animate-out .transition-blur {
+    animation: blur-in 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* Transition animation - entering new page */
+.page-transition.animate-in .transition-circle {
+    animation: circle-contract 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.page-transition.animate-in .transition-light {
+    animation: light-fade-out 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.page-transition.animate-in .transition-bg {
+    animation: bg-fade-out 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.page-transition.animate-in .transition-blur {
+    animation: blur-out 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* 定义圆形扩展动画 */
+@keyframes circle-expand {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+    }
+    100% {
+        width: 250vw;
+        height: 250vw;
+        opacity: 0.9;
+    }
+}
+
+/* 定义圆形收缩动画 */
+@keyframes circle-contract {
+    0% {
+        width: 250vw;
+        height: 250vw;
+        opacity: 0.9;
+    }
+    100% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+}
+
+/* 定义光效淡入动画 */
+@keyframes light-fade-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 定义光效淡出动画 */
+@keyframes light-fade-out {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+/* 定义背景淡入动画 */
+@keyframes bg-fade-in {
+    0% {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+}
+
+/* 定义背景淡出动画 */
+@keyframes bg-fade-out {
+    0% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+/* 定义模糊效果动画 */
+@keyframes blur-in {
+    0% {
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    100% {
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+}
+
+@keyframes blur-out {
+    0% {
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+    100% {
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+}
+
+/* 防止页面在转场期间滚动 */
+body.transitioning {
+    overflow: hidden;
+}
+
+/* 音符元素容器 */
+.music-notes-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* 音符元素样式 */
+.music-note {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+}
+
+/* 不同音符图形 */
+.note-1 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/%3E%3C/svg%3E");
+}
+
+.note-2 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M6 18.05V3h12v15.05c0 2.18-1.8 3.95-4 3.95s-4-1.77-4-3.95zM12 14c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/%3E%3C/svg%3E");
+}
+
+.note-3 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm-2 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E");
+}
+
+/* 转场动画 - 离开当前页面 */
+.page-transition.animate-out {
+    opacity: 1;
+    animation: fade-in 0.8s ease-out forwards;
+}
+
+/* 转场动画 - 进入新页面 */
+.page-transition.animate-in {
+    opacity: 1;
+    animation: fade-out 0.8s ease-in forwards;
+}
+
+/* 定义淡入淡出动画 */
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* 音符动画 */
+@keyframes float-note {
+    0% {
+        transform: translateY(100%) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 闪烁效果 */
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9)); }
+}
+
+/* 防止页面在转场期间滚动 */
+body.transitioning {
+    overflow: hidden;
+}
+
+/* 添加脉冲光环效果 */
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        width: 100px;
+        height: 100px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/* 音乐律动遮罩转场动画样式 */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* 律动波容器 */
+.rhythm-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(10, 10, 26, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 律动波元素 */
+.rhythm-wave {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 153, 0, 0.8);
+    box-shadow: 0 0 20px rgba(102, 0, 255, 0.6);
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* 舞台灯光效果 */
+.stage-light {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, rgba(102, 0, 255, 0.3) 0%, rgba(10, 10, 26, 0) 70%);
+    opacity: 0;
+    mix-blend-mode: screen;
+}
+
+/* 舞台聚光灯 */
+.spotlight {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 153, 0, 0.8) 0%, rgba(255, 153, 0, 0) 70%);
+    filter: blur(5px);
+    opacity: 0;
+    mix-blend-mode: screen;
+}
+
+/* 转场动画 - 离开当前页面 */
+.page-transition.animate-out .rhythm-container {
+    opacity: 1;
+}
+
+/* 转场动画 - 进入新页面 */
+.page-transition.animate-in .rhythm-container {
+    opacity: 1;
+    animation: fade-out 1s ease-in-out forwards 0.5s;
+}
+
+/* 定义淡出动画 */
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* 律动波动画 */
+@keyframes rhythm-pulse {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+        border-color: rgba(102, 0, 255, 0.8);
+    }
+    50% {
+        opacity: 0.5;
+        border-color: rgba(255, 153, 0, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+        border-color: rgba(102, 0, 255, 0.2);
+    }
+}
+
+/* 聚光灯动画 */
+@keyframes spotlight-move {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translate(-30vw, -20vh);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(30vw, -10vh);
+        opacity: 0.7;
+    }
+    75% {
+        transform: translate(-20vw, 20vh);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+    }
+}
+
+/* 舞台灯光动画 */
+@keyframes stage-light-pulse {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.5; }
+    100% { opacity: 0.2; }
+}
+
+/* 防止页面在转场期间滚动 */
+body.transitioning {
+    overflow: hidden;
+}
+
+/* 添加脉冲光环效果 */
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        width: 100px;
+        height: 100px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}

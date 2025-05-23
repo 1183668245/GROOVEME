@@ -1,0 +1,332 @@
+/* Music creation page styles */
+.music-creator-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.music-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    text-align: center;
+    position: relative;
+}
+
+
+/* Form styles */
+.music-form-container {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+#song-lyrics {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: rgba(20, 20, 43, 0.5);
+    color: var(--text-color);
+    font-size: 14px;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+#song-lyrics:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(102, 0, 255, 0.2);
+}
+
+/* Style selector styles */
+.style-selector, .gender-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.style-option, .gender-option {
+    padding: 10px 20px;
+    background-color: rgba(42, 42, 74, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.style-option:hover, .gender-option:hover {
+    background-color: rgba(102, 0, 255, 0.1);
+    color: var(--text-color);
+}
+
+.style-option.active, .gender-option.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 生成按钮样式 */
+.generate-button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#generate-music-btn {
+    padding: 12px 40px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 0, 255, 0.3);
+}
+
+#generate-music-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 0, 255, 0.4);
+}
+
+#generate-music-btn:active {
+    transform: translateY(1px);
+}
+
+/* 结果区域样式 */
+.generated-music-container {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 15px;
+}
+
+.section-title:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 20px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+}
+
+.music-result {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-result-message {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* 音乐播放器样式 - 将在JS中动态生成 */
+.music-player {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.music-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.music-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: rgba(42, 42, 74, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-cover i {
+    font-size: 30px;
+    color: var(--primary-color);
+}
+
+.music-details {
+    flex: 1;
+}
+
+.music-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.music-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* 动作按钮容器样式 */
+.action-buttons {
+    display: flex;
+    gap: 15px; /* 按钮之间的间距 */
+    margin-top: 15px; /* 与播放器的间距 */
+    justify-content: flex-start; /* 按钮靠左对齐，可以根据需要调整为 center 或 flex-end */
+}
+
+/* 通用动作按钮样式 */
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px; /* 圆角效果 */
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex; /* 使图标和文字在同一行并居中 */
+    align-items: center;
+    gap: 8px; /* 图标和文字之间的间距 */
+    text-decoration: none; /* 如果是链接按钮，移除下划线 */
+}
+
+.action-btn i {
+    font-size: 16px; /* 图标大小 */
+}
+
+/* 复制链接按钮特定样式 */
+#copy-link-btn {
+    background-color: var(--primary-color); /* 使用主题主色 */
+}
+
+#copy-link-btn:hover {
+    background-color: var(--secondary-color); /* 悬停时使用主题辅色或更亮的颜色 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 分享至推特按钮特定样式 */
+#share-twitter-btn {
+    background-color: #1DA1F2; /* Twitter 品牌蓝色 */
+}
+
+#share-twitter-btn:hover {
+    background-color: #0c85d0; /* Twitter 品牌蓝色加深 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+/* 加载指示器和错误消息样式 (如果需要调整) */
+.loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    color: var(--text-secondary);
+}
+
+.loading-indicator i {
+    font-size: 30px;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    animation: pulse 1.5s infinite alternate;
+}
+
+/* 添加脉冲动画效果 */
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* 进度条样式 */
+.progress-container {
+    width: 100%;
+    max-width: 300px;
+    height: 8px;
+    background-color: rgba(42, 42, 74, 0.7);
+    border-radius: 4px;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.error-message {
+    padding: 15px;
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid #ff3333;
+    color: #ff3333;
+    border-radius: 4px;}
