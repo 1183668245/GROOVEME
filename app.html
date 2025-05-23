@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrooveMe App</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="update-notice.css">
+    <link rel="stylesheet" href="music-creator.css">
+    <link rel="stylesheet" href="video-creator.css">
+    <link rel="stylesheet" href="page-transition.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="GrooveMe Logo">
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="active" data-page="featured"><i class="fas fa-fire"></i>Selected Translations</li>
+                    <li data-page="lyrics"><i class="fas fa-pen-fancy"></i>Generate Lyrics</li>
+                    <li data-page="music" class="active"><i class="fas fa-music"></i>Generate Music</li>
+                    <li data-page="video"><i class="fas fa-video"></i>Generate MV</li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <!-- Top bar -->
+            <div class="top-bar">
+               
+                <div class="update-notice">
+                    <i class="fas fa-bell notice-icon"></i>
+                    <span id="update-notice-text">2025.5.23 Web Update Announcement
+
+                    </span>
+                </div>
+                <div class="top-right">
+                    <a href="index.html" class="home-btn"><i class="fas fa-home"></i> HOME</a>
+                </div>
+            </div>
+    <!-- Update notice modal -->
+    <div id="update-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>May 23rd Web Update Announcement
+                </h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="update-item">
+                    <div class="update-date">Version 1.1 Update Preview</div>
+                    <h3>Feature Optimizations & Content Updates</h3>
+                    <ul>
+                        <li><span class="tag new">New</span>Backend login system: users can upload and store generated music works, and create playlists.</li>
+                        <li><span class="tag new">New</span>Work sharing square: users can upload and share their works, visible to other users.</li>
+                        <li><span class="tag new">New</span>Like and comment functions: convenient for users to communicate and discuss.</li>
+                        <li><span class="tag new">New</span>Points system: monthly selection of the most popular works for airdrop rewards.</li>
+                        <li><span class="tag fixed">Fixed</span>Video generation function.</li>
+                    </ul>
+                </div>
+                <div class="update-item">
+                    <div class="update-date">May 23, 2025</div>
+                    <h3>Platform Launch Announcement</h3>
+                    <p>After three months of preparation, the GrooveMe music creation platform is officially launched today! All features in the current version are free to use. We are committed to providing music lovers with intelligent music creation tools, allowing everyone to easily create their own musical works.</p>
+                    <p>Initial features include:</p>
+                    <ul>
+                        <li>AI-assisted lyric writing</li>
+                        <li>Multi-style music generation</li>
+                        <li>User feedback system</li>
+                        <li>Work download and sharing</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p>More features are under continuous development, stay tuned!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="carousel.js"></script>
+    <script src="update-notice.js"></script>
+    <script src="lyrics-creator.js"></script>
+<script src="suno-api.js"></script>
+<script src="another-script.js"></script>
+</body>
+</body>
+</html>
+<script src="featured-search.js"></script>
+
+            <!-- 精选页面 -->
+            <div class="page-content active" id="featured-page">
+                <!-- 轮播图区域 -->
+                <div class="featured-carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="carousel-content">
+                                <img src="Build On with B.jpg" alt="精选视频">
+                                <div class="carousel-caption">
+                                    <h3>Build On with B</h3>
+                                    <p>Build on, build on, the $B leads the way!</p>
+                                </div>
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <img src="Siren.jpg"  alt="精选视频">
+                                <div class="carousel-caption">
+                                    <h3>Siren-Chain Anthem</h3>
+                                    <p> Set the chains on fire!AI ignites the new empire!</p>
+                                </div>
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <img src="Mubarak.jpg" alt="精选视频">
+                                <div class="carousel-caption">
+                                    <h3>《Mubarak》-区块链之光</h3>
+                                    <p>币安meme的狂潮，让全世界看到</p>
+                                </div>
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <img src="SKYAI.jpg"  alt="精选视频">
+                                <div class="carousel-caption">
+                                    <h3>《SKYAI 天际线》</h3>
+                                    <p>BNB链上最强代币,BNB链上最强代币</p>
+                                </div>
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-control next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                
+                <!-- 语言分类 -->
+                <div class="language-filter">
+                    <div class="language-tag active">recommend</div>
+                    <a href="#" class="more-link">More ></a>
+                </div>
+                
+                <!-- 视频网格 -->
+                <div class="featured-grid">
+                    <!-- 大型特色视频 -->
+                    <div class="featured-large-card">
+                        <div class="video-thumbnail">
+                            <img src="SKYAI.jpg"  alt="精选视频">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>《SKYAI 天际线》</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- 小型视频卡片组 -->
+                    <div class="featured-small-group">
+                        <!-- 视频卡片1 -->
+                        <div class="featured-small-card">
+                            <div class="video-thumbnail">
+                                <img src="babydoge.jpg"  alt="精选视频">
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h5>宝贝狗之歌</h5>
+                                <p>$babydoge</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 视频卡片2 -->
+                        <div class="featured-small-card">
+                            <div class="video-thumbnail">
+                                <img src="Learn withTUT.jpg"  alt="精选视频">
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h5>Learn withTUT</h5>
+                                <p>$TUT</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 视频卡片3 -->
+                        <div class="featured-small-card">
+                            <div class="video-thumbnail">
+                                <img src="Broccoli.jpg" alt="精选视频">
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h5>Broccoli的加密王国</h5>
+                                <p>$Broccoli</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 视频卡片4 -->
+                        <div class="featured-small-card">
+                            <div class="video-thumbnail">
+                                <img src="FLOKI.jpg"  alt="精选视频">
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h5>FLOKI革命</h5>
+                                <p>$FLOKI</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 视频卡片5 -->
+                        <div class="featured-small-card">
+                            <div class="video-thumbnail">
+                                <img src="Build On with B.jpg"  alt="精选视频">
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h5>Build On with B </h5>
+                                <p></p>
+                            </div>
+                        </div>
+                        
+                        <!-- 视频卡片6 -->
+                        <div class="featured-small-card">
+                            <div class="video-thumbnail">
+                                <img src="FIST.jpg"  alt="精选视频">
+                                <div class="play-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h5>铁拳颂</h5>
+                                <p>$FIST</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 歌词创作页面 -->
+            <div id="lyrics-page" class="page-content">
+                <div class="lyrics-creator-container">
+                    <h2>AI Lyrics Generator</h2>
+                    <div class="input-group">
+                        <textarea id="lyrics-prompt" placeholder="Enter a description or theme for your lyrics..."></textarea>
+                    </div>
+                    <div class="style-tags-container">
+                        <p>Select Styles (Optional):</p>
+                        <div class="style-tags">
+                            <button class="style-tag" data-style="Ballad">Ballad</button>
+                            <button class="style-tag" data-style="Rock">Rock</button>
+                            <button class="style-tag" data-style="Folk">Folk</button>
+                            <button class="style-tag" data-style="Ancient">Ancient</button>
+                            <button class="style-tag" data-style="Modern">Modern</button>
+                            <button class="style-tag" data-style="Hip-hop">Hip-hop</button>
+                            <button class="style-tag" data-style="Pop">Pop</button>
+                            <!-- Add more styles as needed -->
+                        </div>
+                    </div>
+                    <div class="generate-button-container">
+                        <button id="generate-lyrics-btn" class="btn primary-gradient full-width"><i class="fas fa-magic"></i> Generate Lyrics</button>
+                    </div>
+                    <div id="lyrics-grid" class="lyrics-grid">
+                        <!-- Generated lyrics will appear here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 生成歌曲页面 -->
+            <div id="music-page" class="page-content active">
+                <div class="music-creator-container">
+                    <h2>AI Music Generator</h2>
+                    <div class="input-group">
+                        <label for="song-lyrics">Lyrics Content</label>
+                        <textarea id="song-lyrics" placeholder="Please enter your lyrics..."></textarea>
+                    </div>
+                    <div class="options-group">
+                        <div class="option-category">
+                            <label>Music Style</label>
+                            <div class="options-list style-options">
+                                <button class="style-option" data-style="Pop">Pop</button>
+                                <button class="style-option" data-style="Folk">Folk</button>
+                                <button class="style-option" data-style="Rock">Rock</button>
+                                <button class="style-option" data-style="Electronic">Electronic</button>
+                                <button class="style-option" data-style="Hip Hop">Hip Hop</button> <!-- 注意 Hip Hop 中间有空格 -->
+                                <button class="style-option" data-style="Traditional">Traditional</button>
+                                <button class="style-option" data-style="Jazz">Jazz</button>
+                                <button class="style-option" data-style="R&B">R&B</button>
+                            </div>
+                        </div>
+                        <div class="option-category">
+                            <label>Singer Gender</label>
+                            <div class="options-list gender-options">
+                                <button class="gender-option" data-gender="Male">Male</button>
+                                <button class="gender-option" data-gender="Female">Female</button>
+                                <button class="gender-option" data-gender="Chorus">Chorus</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="generate-button-container">
+                        <button id="generate-music-btn" class="btn primary-gradient full-width"><i class="fas fa-magic"></i> Generate Music</button>
+                    </div>
+                    <div id="music-result" class="music-result-container">
+                        <!-- Generated music will appear here -->
+                    </div>
+                </div>
+            </div>
+            <!-- 生成视频页面 -->
+            <div class="page-content" id="video-page">
+                <div class="video-creator-container">
+                    <h1 class="video-title">AI MV Generator</h1>
+                    
+                    <!-- 视频创作表单 -->
+                    <div class="video-form-container">
+                        <!-- 提示词输入区域 -->
+                        <div class="form-group">
+                            <label for="video-prompt">Video Prompt</label>
+                            <textarea id="video-prompt" placeholder="Describe the MV scene, style, elements, etc. you want..."></textarea>
+                        </div>
+                        
+                        <!-- 音频上传区域 -->
+                        <div class="form-group">
+                            <label>Upload Background Music</label>
+                            <div class="audio-upload-container">
+                                <div class="upload-area" id="audio-upload-area">
+                                    <div class="upload-area" id="audio-upload-area">
+                                        <i class="fas fa-music upload-icon"></i>
+                                        <p class="upload-text">Click or drag audio file here</p>
+                                        <p class="upload-hint">Supports MP3, WAV format, max 50MB</p>
+                                        <input type="file" id="audio-file" accept="audio/*" class="file-input" />
+                                    </div>
+                                    <div class="uploaded-audio-preview" id="uploaded-audio-preview" style="display: none;">
+                                        <div class="audio-info">
+                                            <i class="fas fa-file-audio"></i>
+                                            <div class="audio-details">
+                                                <p class="audio-name" id="audio-name"></p>
+                                                <p class="audio-size" id="audio-size"></p>
+                                            </div>
+                                        </div>
+                                        <div class="audio-actions">
+                                            <button class="preview-btn" id="preview-audio-btn"><i class="fas fa-play"></i> Preview</button>
+                                            <button class="remove-btn" id="remove-audio-btn"><i class="fas fa-times"></i></button>
+                                        </div>
+                                        <audio id="audio-preview" controls style="display: none;"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 生成按钮 -->
+                            <div class="generate-button-container">
+                                <button id="generate-video-btn" style="padding: 12px 40px; background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 0, 255, 0.3);">Generate MV</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 生成的视频展示区域 -->
+                        <div class="generated-video-container">
+                            <h2 class="section-title">Generated Result</h2>
+                            <div class="video-result" id="video-result">
+                                <!-- 视频结果将通过JS动态生成 -->
+                                <div class="empty-result-message">Your MV video will be displayed here</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>
+<script src="app.js"></script>
+<script src="featured-player.js"></script>
+
+<script src="music-creator.js"></script>
+<script src="video-creator.js"></script>
+<script src="update-notice.js"></script>
+<script src="page-transition.js"></script>
+</body>
+</html>
