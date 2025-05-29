@@ -64,21 +64,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Get all links that need transition effects
-    const transitionLinks = document.querySelectorAll('a[href="app.html"]');
+    const transitionLinks = document.querySelectorAll('a[href="./app.html"]');
     
     // Add click event to each link
     transitionLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault(); // Prevent default navigation
             const targetHref = this.getAttribute('href');
-            
+    
             // Add transition animation class
             document.body.classList.add('transitioning');
             transitionElement.classList.add('animate-out');
-            
+    
             // Create rhythm wave animation
             createRhythmWaves();
-            
+    
             // Navigate to target page after animation completes
             setTimeout(() => {
                 window.location.href = targetHref;
@@ -87,13 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // If navigating from another page, show enter animation
-    if (document.referrer && document.referrer.includes('index.html')) {
+    if (document.referrer && document.referrer.includes('./index.html')) {
         transitionElement.classList.add('animate-in');
         document.body.classList.add('transitioning');
-        
+    
         // Create rhythm wave animation
         createRhythmWaves();
-        
+    
         // Remove class after animation completes
         setTimeout(() => {
             transitionElement.classList.remove('animate-in');
