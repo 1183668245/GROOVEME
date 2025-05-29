@@ -1,5 +1,16 @@
 // Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function() {
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navUl = document.querySelector('nav ul');
+
+    if (hamburger && navUl) {
+        hamburger.addEventListener('click', function() {
+            navUl.classList.toggle('active');
+            hamburger.classList.toggle('active'); // Toggle hamburger icon active state
+        });
+    }
+
     // Smooth scrolling effect
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
