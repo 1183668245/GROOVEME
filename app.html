@@ -41,7 +41,7 @@
                     </span>
                 </div>
                 <div class="top-right">
-                    <a href="index.html" class="home-btn"><i class="fas fa-home"></i> HOME</a>
+                    <a href="./index.html" class="home-btn"><i class="fas fa-home"></i> HOME</a>
                 </div>
             </div>
     <!-- Update notice modal -->
@@ -93,14 +93,14 @@
 </html>
 <script src="featured-search.js"></script>
 
-            <!-- 精选页面 -->
+      
             <div class="page-content active" id="featured-page">
-                <!-- 轮播图区域 -->
+      
                 <div class="featured-carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="carousel-content">
-                                <img src="Build On with B.jpg" alt="精选视频">
+                                <img src="Build On with B.jpg" alt="">
                                 <div class="carousel-caption">
                                     <h3>Build On with B</h3>
                                     <p>Build on, build on, the $B leads the way!</p>
@@ -151,15 +151,14 @@
                     <button class="carousel-control next"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 
-                <!-- 语言分类 -->
+    
                 <div class="language-filter">
                     <div class="language-tag active">recommend</div>
                     <a href="#" class="more-link">More ></a>
                 </div>
-                
-                <!-- 视频网格 -->
+             
                 <div class="featured-grid">
-                    <!-- 大型特色视频 -->
+ 
                     <div class="featured-large-card">
                         <div class="video-thumbnail">
                             <img src="SKYAI.jpg"  alt="精选视频">
@@ -171,8 +170,7 @@
                             <h4>《SKYAI 天际线》</h4>
                         </div>
                     </div>
-                    
-                    <!-- 小型视频卡片组 -->
+ 
                     <div class="featured-small-group">
                         <!-- 视频卡片1 -->
                         <div class="featured-small-card">
@@ -188,7 +186,7 @@
                             </div>
                         </div>
                         
-                        <!-- 视频卡片2 -->
+               
                         <div class="featured-small-card">
                             <div class="video-thumbnail">
                                 <img src="Learn withTUT.jpg"  alt="精选视频">
@@ -201,8 +199,7 @@
                                 <p>$TUT</p>
                             </div>
                         </div>
-                        
-                        <!-- 视频卡片3 -->
+              
                         <div class="featured-small-card">
                             <div class="video-thumbnail">
                                 <img src="Broccoli.jpg" alt="精选视频">
@@ -216,7 +213,7 @@
                             </div>
                         </div>
                         
-                        <!-- 视频卡片4 -->
+                     
                         <div class="featured-small-card">
                             <div class="video-thumbnail">
                                 <img src="FLOKI.jpg"  alt="精选视频">
@@ -230,7 +227,7 @@
                             </div>
                         </div>
                         
-                        <!-- 视频卡片5 -->
+                    
                         <div class="featured-small-card">
                             <div class="video-thumbnail">
                                 <img src="Build On with B.jpg"  alt="精选视频">
@@ -244,7 +241,6 @@
                             </div>
                         </div>
                         
-                        <!-- 视频卡片6 -->
                         <div class="featured-small-card">
                             <div class="video-thumbnail">
                                 <img src="FIST.jpg"  alt="精选视频">
@@ -260,7 +256,7 @@
                     </div>
                 </div>
             </div>
-            <!-- 歌词创作页面 -->
+
             <div id="lyrics-page" class="page-content">
                 <div class="lyrics-creator-container">
                     <h2>AI Lyrics Generator</h2>
@@ -289,7 +285,7 @@
                 </div>
             </div>
             
-            <!-- 生成歌曲页面 -->
+      
             <div id="music-page" class="page-content active">
                 <div class="music-creator-container">
                     <h2>AI Music Generator</h2>
@@ -328,20 +324,19 @@
                     </div>
                 </div>
             </div>
-            <!-- 生成视频页面 -->
             <div class="page-content" id="video-page">
                 <div class="video-creator-container">
                     <h1 class="video-title">AI MV Generator</h1>
                     
-                    <!-- 视频创作表单 -->
+            
                     <div class="video-form-container">
-                        <!-- 提示词输入区域 -->
+                   
                         <div class="form-group">
                             <label for="video-prompt">Video Prompt</label>
                             <textarea id="video-prompt" placeholder="Describe the MV scene, style, elements, etc. you want..."></textarea>
                         </div>
                         
-                        <!-- 音频上传区域 -->
+                      
                         <div class="form-group">
                             <label>Upload Background Music</label>
                             <div class="audio-upload-container">
@@ -369,17 +364,16 @@
                                 </div>
                             </div>
                             
-                            <!-- 生成按钮 -->
                             <div class="generate-button-container">
                                 <button id="generate-video-btn" style="padding: 12px 40px; background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 0, 255, 0.3);">Generate MV</button>
                             </div>
                         </div>
                         
-                        <!-- 生成的视频展示区域 -->
+                     
                         <div class="generated-video-container">
                             <h2 class="section-title">Generated Result</h2>
                             <div class="video-result" id="video-result">
-                                <!-- 视频结果将通过JS动态生成 -->
+                                
                                 <div class="empty-result-message">Your MV video will be displayed here</div>
                             </div>
                         </div>
