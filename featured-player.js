@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     `;
     document.body.appendChild(videoModal);
-    videoModal.style.display = 'none'; // <--- 添加这一行
+    videoModal.style.display = 'none'; 
     
     // Get video player and close button
     const videoPlayer = document.getElementById('video-player');
