@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Video data mapping - in a real project, this might be fetched from a server
     const videoData = {
-        'Build On with B': 'Build On with B.mp4',
+        'JAGER 飞轮战歌': 'JAGER 飞轮战歌.mp4',
         'Siren-Chain Anthem': 'Siren.mp4', 
         '《Mubarak》-区块链之光': '《Mubarak》-区块链之光.mp4', // Keep Chinese if it's a title
         '《SKYAI 天际线》': 'SKYAI天际线.mp4', // Keep Chinese if it's a title
