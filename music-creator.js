@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get the first generated song
         const song = songs[0]; // API might return multiple results, take the first one here
         console.log('Fetched song data for display:', song); // Print fetched song data to console
+        console.log('Song audio URL:', song.audio_url); // Add this line to log the audio URL
 
         // Create song player HTML
         const playerHTML = `
