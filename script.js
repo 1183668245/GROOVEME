@@ -3,11 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hamburger menu toggle
     const hamburger = document.querySelector('.hamburger');
     const navUl = document.querySelector('nav ul');
+    const secondaryNav = document.querySelector('.secondary-nav');
 
     if (hamburger && navUl) {
-        hamburger.addEventListener('click', function() {
-            navUl.classList.toggle('active');
-            hamburger.classList.toggle('active'); // Toggle hamburger icon active state
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            secondaryNav.classList.toggle('active');
         });
     }
 
@@ -102,6 +103,80 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
+
+    // Mobile menu toggle
+    const menuIcon = document.querySelector('.menu-icon');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    if (menuIcon && mobileMenu) {
+        menuIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('active');
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function closeMenu(e) {
+                if (!mobileMenu.contains(e.target) && !menuIcon.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    document.removeEventListener('click', closeMenu);
+                }
+            });
+        });
+    }
+
+    // Add wallet connection handling
+    const connectWalletButtons = document.querySelectorAll('.connect-wallet');
+    connectWalletButtons.forEach(button => {
+        button.addEventListener('click', async function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Check if MetaMask is installed
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    // Request account access
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    if (accounts && accounts.length > 0) {
+                        const address = accounts[0];
+                        updateWalletDisplay(address);
+                        
+                        // Listen for account changes
+                        window.ethereum.on('accountsChanged', function (accounts) {
+                            if (accounts.length > 0) {
+                                updateWalletDisplay(accounts[0]);
+                            } else {
+                                // Reset buttons if disconnected
+                                updateWalletDisplay('');
+                                connectWalletButtons.forEach(btn => {
+                                    btn.innerHTML = '<i class="fas fa-wallet"></i> Connect Wallet';
+                                });
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error connecting wallet:', error);
+                    if (error.code === 4001) {
+                        alert('Please connect your wallet to continue');
+                    } else {
+                        alert('Error connecting to wallet: ' + error.message);
+                    }
+                }
+            } else {
+                alert('Please install MetaMask to connect your wallet');
+                window.open('https://metamask.io/download/', '_blank');
+            }
+        });
+    });
+    
+    // Check if already connected
+    if (typeof window.ethereum !== 'undefined') {
+        window.ethereum.request({ method: 'eth_accounts' })
+            .then(accounts => {
+                if (accounts && accounts.length > 0) {
+                    updateWalletDisplay(accounts[0]);
+                }
+            })
+            .catch(console.error);
+    }
 });
 
 
@@ -356,3 +431,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Add formatWalletAddress function
+function formatWalletAddress(address) {
+    if (!address) return '';
+    return `${address.substring(0, 4)}...${address.substring(address.length - 4)}`;
+}
+
+// Update wallet display in both header and mobile menu
+function updateWalletDisplay(address) {
+    // Update header wallet button
+    const headerWalletBtn = document.querySelector('.secondary-nav .connect-wallet');
+    if (headerWalletBtn) {
+        headerWalletBtn.innerHTML = `<i class="fas fa-wallet"></i> ${formatWalletAddress(address)}`;
+    }
+    
+    // Update mobile menu wallet button
+    const mobileWalletBtn = document.querySelector('.mobile-menu .connect-wallet');
+    if (mobileWalletBtn) {
+        mobileWalletBtn.innerHTML = `<i class="fas fa-wallet"></i> ${formatWalletAddress(address)}`;
+    }
+}
