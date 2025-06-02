@@ -261,6 +261,121 @@
                 display: flex;
             }
         }
+
+        /* 添加 K线图相关样式 */
+        .kline-window {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 400px;
+            height: 400px;
+            background: #1c1c36;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kline-header {
+            padding: 8px;
+            background: #2a2a4a;
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .kline-title {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .kline-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .kline-content {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .kline-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 移动端 K线图标和底部弹出窗口 */
+        .kline-mobile-icon {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #6f3cff, #00c6ff);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .kline-bottom-sheet {
+            display: none;
+            position: fixed;
+            bottom: -50vh;
+            left: 0;
+            width: 100%;
+            height: 50vh;
+            background: #1c1c36;
+            z-index: 1001;
+            transition: transform 0.3s ease;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        .kline-bottom-sheet.active {
+            transform: translateY(-100%);
+        }
+
+        .bottom-sheet-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bottom-sheet-content {
+            height: calc(100% - 53px);
+            overflow: hidden;
+        }
+
+        @media screen and (max-width: 768px) {
+            .kline-window {
+                display: none;
+            }
+            
+            .kline-mobile-icon {
+                display: flex;
+            }
+            
+            .kline-bottom-sheet {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -304,6 +419,111 @@
         </div>
     </div>
 
+    <!-- 添加桌面端 K线窗口 -->
+    <div class="kline-window" id="klineWindow">
+        <div class="kline-header" id="klineHeader">
+            <div class="kline-title">K线图</div>
+            <button class="kline-close" id="klineClose">&times;</button>
+        </div>
+        <div class="kline-content">
+            <iframe class="kline-iframe" src="kline.html"></iframe>
+        </div>
+    </div>
+
+    <!-- 添加移动端 K线图标 -->
+    <div class="kline-mobile-icon" id="klineMobileIcon">
+        <i class="fas fa-chart-line"></i>
+    </div>
+
+    <!-- 添加移动端底部弹出窗口 -->
+    <div class="kline-bottom-sheet" id="klineBottomSheet">
+        <div class="bottom-sheet-header">
+            <div class="kline-title">K线图</div>
+            <button class="kline-close" id="bottomSheetClose">&times;</button>
+        </div>
+        <div class="bottom-sheet-content">
+            <iframe class="kline-iframe" src="kline.html"></iframe>
+        </div>
+    </div>
+
     <script src="chat.js"></script>
+    <script>
+        // 添加 K线图相关脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            const klineWindow = document.getElementById('klineWindow');
+            const klineHeader = document.getElementById('klineHeader');
+            const klineClose = document.getElementById('klineClose');
+            const klineMobileIcon = document.getElementById('klineMobileIcon');
+            const klineBottomSheet = document.getElementById('klineBottomSheet');
+            const bottomSheetClose = document.getElementById('bottomSheetClose');
+            
+            // 桌面端拖拽功能
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            klineHeader.addEventListener('mousedown', dragStart);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', dragEnd);
+
+            function dragStart(e) {
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+
+                if (e.target === klineHeader) {
+                    isDragging = true;
+                }
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+
+                    xOffset = currentX;
+                    yOffset = currentY;
+
+                    setTranslate(currentX, currentY, klineWindow);
+                }
+            }
+
+            function dragEnd(e) {
+                initialX = currentX;
+                initialY = currentY;
+                isDragging = false;
+            }
+
+            function setTranslate(xPos, yPos, el) {
+                el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+            }
+
+            // 关闭桌面端窗口
+            klineClose.addEventListener('click', () => {
+                klineWindow.style.display = 'none';
+            });
+
+            // 移动端底部弹出窗口
+            klineMobileIcon.addEventListener('click', () => {
+                klineBottomSheet.classList.add('active');
+            });
+
+            bottomSheetClose.addEventListener('click', () => {
+                klineBottomSheet.classList.remove('active');
+            });
+
+            // 点击遮罩层关闭底部弹出窗口
+            klineBottomSheet.addEventListener('click', (e) => {
+                if (e.target === klineBottomSheet) {
+                    klineBottomSheet.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
