@@ -9,74 +9,214 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
-        /* Hero section background image style */
-        .hero-bg {
-            position: relative;
-            overflow: hidden;
-            height: 400px; 
-            background-image: url('bak.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            
+        .connect-wallet {
+            height: 40px !important;
         }
 
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(20, 20, 43, 0.9); /* Use a darker color, consistent with what's shown in the image */
-            z-index: 0; /* Ensure it covers the background image */
-        }
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(20, 20, 43, 0.7); /* Revert to previous color value */
-            z-index: -1;
-        }
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(20, 20, 43, 0.7); /* Revert to previous color value */
-            z-index: -1;
-        }
-        .hero-bg::after {
-            content: none;
-        }
-        
-        .hero {
-            padding: 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start; /* Keep left-aligned */
-            padding-left: 10%;
-        }
-        
-        /* Fixed header with frosted glass effect */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(20, 20, 43, 0.7); /* Revert to previous color value */
+            background: rgba(20, 20, 43, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            height: 70px;
+            line-height: 70px;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-left: 20px;
+            margin-right: auto;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 20px;
+            height: 40px;
+            line-height: 25px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .main-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .secondary-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .secondary-nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-right: 20px;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            margin-right: 20px;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .menu-icon i {
+            color: white;
+            font-size: 20px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 0;
+            /* background: rgba(20, 20, 43, 0.95); */
+            backdrop-filter: blur(10px);
+            width: 200px;
+            /* border-bottom-left-radius: 10px; */
+            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .mobile-menu.active {
+            display: block;
+            background-color: #00000050;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mobile-menu ul li {
+            padding: 0;
+        }
+
+        .mobile-menu ul li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        
+
+        .mobile-menu ul li a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                height: 60px;
+                line-height: 60px;
+            }
+
+            .menu-icon {
+                display: flex;
+                cursor: pointer;
+                width: 40px;
+                position: absolute;
+                right: 10px;
+                top: 14px;
+                height: 40px;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.3s;
+            }
+            .mobile-menu ul li a{
+        padding: 0 20px;
+    }
+            .left-section {
+                gap: 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+
+            .main-nav {
+                gap: 10px;
+                height: 35px;
+            }
+
+            .main-nav a {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+
+            .secondary-nav ul {
+                display: none;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+
+            .mobile-menu {
+                top: 60px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header {
+                padding: 0 10px;
+            }
+
+            .logo img {
+                height: 35px;
+            }
+
+            .main-nav a {
+                padding: 4px 8px;
+                font-size: 13px;
+            }
         }
         
         /* Add top margin to body to prevent fixed header from overlapping content */
@@ -163,10 +303,11 @@
             cursor: pointer;
             padding: 10px;
             z-index: 1001;
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 20px;
         }
         
         .hamburger span {
@@ -192,72 +333,8 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
         
-        @media screen and (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-            
-            nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 250px;
-                height: 100vh;
-                background: rgba(8, 7, 19, 0.95);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: 100px;
-                transition: right 0.3s ease;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-            }
-            
-            nav ul.active {
-                right: 0;
-            }
-            
-            nav ul li {
-                margin: 20px 0;
-                width: 100%;
-                text-align: center;
-            }
-            
-            nav ul li a {
-                padding: 10px 10px; /* Change 20px here to 10px */
-                display: block;
-                font-size: 18px;
-                transition: all 0.3s ease;
-            }
-            
-            nav ul li a:hover {
-                background: rgba(255, 255, 255, 0.1);
-                transform: translateY(-2px);
-            }
-            
-            header {
-                padding: 0 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                height: 80px;
-            }
-            
-            .logo {
-                margin-right: auto;
-                padding: 10px 0;
-            }
-            
-            .logo img {
-                height: 40px;
-            }
-        }
-        
-        /* Add optimization for extra small screen devices */
         @media screen and (max-width: 575px) {
-            nav ul {
-                /* width: 200px; */ /* Uncomment and adjust width as needed */
-            }
+           
 
             nav ul li {
                 margin: 10px auto; /* Reduce vertical spacing and center */
@@ -302,6 +379,7 @@
             
             header {
                 height: 70px;
+                line-height: 70px;
                 padding: 0 15px;
             }
 
@@ -311,8 +389,8 @@
 
             /* Adjust hero area bottom padding to make space for the button */
             .hero-bg {
-                padding-bottom: 100px; /* Increase bottom padding to prevent button overlap */
-                padding-top: 80px; /* Increase top padding to prevent main title overlap */
+                padding: 0 40px; 
+                
             }
 
             /* Adjust hero area content font size */
@@ -333,22 +411,32 @@
     </style>
 </head>
 <body>
-    <!-- header移出container -->
     <header>
-        <div class="logo">
-            <img src="logo.png" alt="Grooveme Logo">
+        <div class="left-section">
+            <div class="logo">
+                <img src="logo.png" alt="Grooveme Logo">
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="chat.html">Chat</a>
+            </nav>
         </div>
-        <nav>
+        <nav class="secondary-nav">
             <ul>
                 <li><a href="#" class="connect-wallet"><i class="fas fa-wallet"></i> Connect Wallet</a></li>
                 <li><a href="https://x.com/GROOVEME_BSC" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
                 <li><a href="https://t.me/GROOVEME_ONBSC" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
             </ul>
+            <div class="menu-icon">
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
         </nav>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="#" class="connect-wallet"><i class="fas fa-wallet"></i> Connect Wallet</a></li>
+                <li><a href="https://x.com/GROOVEME_BSC" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="https://t.me/GROOVEME_ONBSC" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
+            </ul>
         </div>
     </header>
     <div class="container">
