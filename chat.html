@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grooveme Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Web3 初始化
+        let web3;
+        
+        // 等待 MetaMask 注入 - 全局函数
+        window.detectEthereum = async () => {
+            return new Promise((resolve) => {
+                const checkEthereum = () => {
+                    if (typeof window.ethereum !== 'undefined') {
+                        console.log('Ethereum found immediately');
+                        // 初始化 Web3
+                        web3 = new Web3(window.ethereum);
+                        resolve(window.ethereum);
+                        return true;
+                    }
+                    return false;
+                };
+
+                // 立即检查一次
+                if (checkEthereum()) return;
+
+                // 如果没有找到，设置事件监听器
+                console.log('Waiting for ethereum...');
+                window.addEventListener('ethereum#initialized', () => {
+                    console.log('Ethereum initialized event fired');
+                    checkEthereum();
+                }, { once: true });
+                
+                // 设置超时
+                setTimeout(() => {
+                    if (!checkEthereum()) {
+                        console.log('Ethereum detection timeout');
+                        resolve(undefined);
+                    }
+                }, 3000);
+            });
+        };
+
+        // 初始化钱包连接
+        async function initWallet() {
+            try {
+                console.log('Initializing wallet...');
+                const ethereum = await window.detectEthereum();
+                
+                if (ethereum && ethereum.isMetaMask) {
+                    console.log('MetaMask is installed!');
+                    
+                    // 检查当前网络
+                    try {
+                        const chainId = await ethereum.request({ method: 'eth_chainId' });
+                        console.log('Current chain ID:', chainId);
+                    } catch (error) {
+                        console.error('Error checking chain ID:', error);
+                    }
+                    
+                    // 为所有连接钱包按钮添加事件监听器
+                    document.querySelectorAll('.connect-wallet').forEach(button => {
+                        button.addEventListener('click', async function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('Connect wallet button clicked');
+                            try {
+                                // 连接成功后的处理
+                                if (typeof connectWallet === 'function') {
+                                    await connectWallet();
+                                } else {
+                                    console.error('connectWallet function not found');
+                                }
+                            } catch (error) {
+                                console.error('Connection error:', error);
+                                if (error.code === 4001) {
+                                    alert('Please connect your wallet to continue');
+                                } else {
+                                    alert('Error connecting to wallet: ' + error.message);
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    console.log('MetaMask not found:', { ethereum });
+                    document.querySelectorAll('.connect-wallet').forEach(button => {
+                        button.addEventListener('click', () => {
+                            if (confirm('MetaMask is not installed. Would you like to install it now?')) {
+                                window.open('https://metamask.io/download/', '_blank');
+                            }
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error('Error initializing wallet:', error);
+            }
+        }
+
+        // 确保在 DOM 加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('DOM Content Loaded - Initializing wallet');
+                initWallet();
+            });
+        } else {
+            console.log('DOM already loaded - Initializing wallet');
+            initWallet();
+        }
+    </script>
+    <style>
+        .connect-wallet {
+            height: 40px !important;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(20, 20, 43, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            height: 70px;
+            line-height: 70px;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-left: 20px;
+            margin-right: auto;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 20px;
+            height: 40px;
+            line-height: 25px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .main-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .secondary-nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-right: 20px;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 20px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                height: 60px;
+                line-height: 60px;
+            }
+            
+            .left-section {
+                gap: 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+
+            .main-nav {
+                gap: 10px;
+                height: 35px;
+            }
+
+            .main-nav a {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+
+            .secondary-nav {
+                display: none;
+            }
+
+            .secondary-nav.active {
+                display: block;
+                position: fixed;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                background: rgba(20, 20, 43, 0.95);
+                padding: 20px;
+            }
+
+            .secondary-nav.active ul {
+                flex-direction: column;
+                gap: 15px;
+                margin-right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="left-section">
+            <div class="logo">
+                <img src="logo.png" alt="Grooveme Logo">
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="chat.html">Chat</a>
+            </nav>
+        </div>
+        <nav class="secondary-nav">
+            <ul>
+                <li><a href="#" class="connect-wallet" id="headerConnectWallet"><i class="fas fa-wallet"></i> Connect Wallet</a></li>
+                <li><a href="https://x.com/GROOVEME_BSC" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="https://t.me/GROOVEME_ONBSC" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
+            </ul>
+        </nav>
+        <div class="menu-icon">
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="#" class="connect-wallet" id="mobileConnectWallet"><i class="fas fa-wallet"></i> Connect Wallet</a></li>
+                <li><a href="https://x.com/GROOVEME_BSC" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="https://t.me/GROOVEME_ONBSC" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="chat-container">
+        <div id="messages" class="chat-messages"></div>
+        
+        <div class="chat-input-container input-area">
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button id="send-button">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html> 
