@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kline Chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #14142b;
+            color: white;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .input-container {
+            display: flex;
+            padding: 10px;
+            background-color: #1c1c36;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .chain-select {
+            padding: 8px;
+            margin-right: 10px;
+            background-color: #2a2a4a;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .address-input {
+            flex: 1;
+            padding: 8px;
+            background-color: #2a2a4a;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .submit-btn {
+            padding: 8px 15px;
+            margin-left: 10px;
+            background: linear-gradient(45deg, #6f3cff, #00c6ff);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #5b31d6, #00b0e6);
+        }
+        
+        .iframe-container {
+            flex: 1;
+            width: 100%;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-container">
+            <select class="chain-select" id="chainSelect">
+                <option value="bsc">BSC</option>
+                <option value="sol">SOL</option>
+                <option value="eth">ETH</option>
+            </select>
+            <input type="text" class="address-input" id="addressInput" placeholder="Enter token address" value="0x26eb73b57be4bc920a2f7983bcc75923c6b04444">
+            <button class="submit-btn" id="submitBtn">Load Chart</button>
+        </div>
+        <div class="iframe-container">
+            <iframe id="klineFrame" src="https://www.gmgn.cc/kline/bsc/0x26eb73b57be4bc920a2f7983bcc75923c6b04444" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chainSelect = document.getElementById('chainSelect');
+            const addressInput = document.getElementById('addressInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const klineFrame = document.getElementById('klineFrame');
+            
+            // Function to update iframe src
+            function updateKlineChart() {
+                const chain = chainSelect.value;
+                const address = addressInput.value.trim();
+                
+                if (address) {
+                    const url = `https://www.gmgn.cc/kline/${chain}/${address}`;
+                    klineFrame.src = url;
+                }
+            }
+            
+            // Event listeners
+            submitBtn.addEventListener('click', updateKlineChart);
+            
+            // Also update when pressing Enter in the input field
+            addressInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    updateKlineChart();
+                }
+            });
+            
+            // Update when changing the chain select
+            chainSelect.addEventListener('change', updateKlineChart);
+        });
+    </script>
+</body>
+</html> 
